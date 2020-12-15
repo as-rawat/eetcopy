@@ -16,7 +16,6 @@ class cls {
     // Iterate through all <pre> tags
     Array.prototype.forEach.call(document.getElementsByTagName('pre'), function (preTagHtml) {
       var preTagList = preTagHtml.innerHTML.split('\n');
-
       preTagList.forEach(function(preTagLine) {
 
         // For all the lines in <pre> which have 'Input:'

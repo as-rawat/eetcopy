@@ -1,6 +1,9 @@
-sleepFor = 1500;
-
 function factoryMethod(inExplore, fixedButtonSelector) {
+
+  // Do nothing if the button is already present
+  if(document.getElementById('copyBtn'))
+    return;
+
   fixedButtonElement = document.querySelector(fixedButtonSelector);
   if(inExplore) {
     copyButtonHtml = '<span id="copyBtn" class="" aria-hidden="true" style="cursor: pointer;"><button class="btn btn-default btn-round" type="button" style="margin-right: 10px;"><span><i class="fa fa-copy" aria-hidden="true"></i>&nbsp;<span>Copy<span class="hidden-xs"> testcase</span></span></span></button></span>';
@@ -47,6 +50,7 @@ async function main() {
    *  If yes, then add the copy button.
    *  Else retry, and eventually stop.
    */
+  var sleepFor = 5000;
   await Utils.sleep(sleepFor);
   fixedButtonSelectorInExplore = '#explore-app > div > div.view-controller > div.content-viewer-view > div.content-base > div > div.question-wrapper > div.editor-area > div > div > div > div.action > div.row > div:nth-child(2) > div > span.hidden-xs';
   fixedButtonSelectorOutExplore = '#app > div > div.main__2_tD > div.content__3fR6 > div > div.editor-wrapper__1ru6 > div > div.container__2WTi > div.action__38Xc > button:nth-child(1)';
