@@ -1,6 +1,6 @@
 {
   "name": "eetcopy",
-  "description" : "Makes your Python development more efficient on LeetCode.",
+  "description" : "Copy all the leetcode testcase on the click of a button",
   "permissions": ["clipboardRead", "clipboardWrite"],
   "version": "0.1.0",
   "background": {
