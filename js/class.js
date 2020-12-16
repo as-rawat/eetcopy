@@ -6,6 +6,7 @@ class cls {
     this.textAreaToggleSelector = textAreaToggleSelector;
     this.textAreaToggleCheckerSelector = textAreaToggleCheckerSelector;
     this.textAreaOnConsoleSelector = textAreaOnConsoleSelector;
+    this.saveClipboardElement = document.createElement("textarea"); // Saves the content of user's clipboard
     this.inputString = ""; // Stores all testcase, same as to be put in "Console"
   }
 
@@ -17,7 +18,6 @@ class cls {
     Array.prototype.forEach.call(document.getElementsByTagName('pre'), function (preTagHtml) {
       var preTagList = preTagHtml.innerHTML.split('\n');
       preTagList.forEach(function(preTagLine) {
-
         // For all the lines in <pre> which have 'Input:'
         if(preTagLine.search('Input:') != -1) {
 
@@ -36,12 +36,30 @@ class cls {
 
     // Remove last line break
     this.inputString = inputString.trim();
+
+    // Tell users, why we couldn't find test case.
+    if(this.inputString == '')
+      this.inputString = 'Could not copy test case. Probably a diffrent format of input or no test case present';
+  }
+
+  saveClipboard() {
+    document.body.appendChild(this.saveClipboardElement);
+    this.saveClipboardElement.select();
+    document.execCommand('paste');
+    this.saveClipboardElement.blur();
+  }
+
+  restoreClipboard() {
+    this.saveClipboardElement.select();
+    document.execCommand('selectAll', false, null);
+    document.execCommand('cut');
+    this.saveClipboardElement.blur();
+    document.body.removeChild(this.saveClipboardElement);
   }
 
   copyTextToClipboard() {
     //Create a textbox field where we can insert text to.
     var copyFrom = document.createElement("textarea");
-
     //Set the text content to be the text you wished to copy.
     copyFrom.textContent = this.inputString;
 

@@ -17,14 +17,16 @@ function factoryMethod(inExplore, fixedButtonSelector) {
       textAreaToggleSelector = '#custom_testcase';
       textAreaToggleCheckerSelector = textAreaToggleSelector;
       obj = new cls(textAreaSelector, textAreaToggleSelector, textAreaToggleCheckerSelector);
+      obj.saveClipboard();
       obj.extractTestcase();
       obj.copyTextToClipboard();
       obj.openTextAreaFromCheckbox();
       obj.pasteTextFromClipboard();
+      obj.restoreClipboard();
     };
   }
   else {
-    copyButtonHtml = '<button id="copyBtn" class="runcode__1EDI css-y98m8o-sm"><span><i class="fa fa-copy" aria-hidden="true"></i>&nbsp;</span><span class="css-1km43m6-BtnContent e5i1odf0">Use test case</span></button>';
+    copyButtonHtml = '<button id="copyBtn" class="runcode__1EDI css-y98m8o-sm"><span class="css-1km43m6-BtnContent e5i1odf0"><span><i class="fa fa-copy" aria-hidden="true"></i>&nbsp;</span>Copy<span class="hidden-xs"> testcase</span></span></button>';
     copyButtonElement = Utils.createElementFromHTML(copyButtonHtml);
 
     Utils.insertBefore(copyButtonElement, fixedButtonElement);
@@ -36,10 +38,12 @@ function factoryMethod(inExplore, fixedButtonSelector) {
       textAreaToggleCheckerSelector = '#app > div > div.main__2_tD > div.content__3fR6 > div > div.editor-wrapper__1ru6 > div > div.container__2WTi > div.func__1DsC > button > svg > path';
       textAreaOnConsoleSelector = '#app > div > div.main__2_tD > div.content__3fR6 > div > div.editor-wrapper__1ru6 > div > div.result__1UhQ > div > div > div.header-content__2Ekc > div > div.css-jccvoy-TabViewHeader.e5i1odf1 > div > div:nth-child(1)';
       obj = new cls(textAreaSelector, textAreaToggleSelector, textAreaToggleCheckerSelector, textAreaOnConsoleSelector);
+      obj.saveClipboard();
       obj.extractTestcase();
       obj.copyTextToClipboard();
       obj.openTextAreaFromButton();
       obj.pasteTextFromClipboard();
+      obj.restoreClipboard();
     };
   }
 }
