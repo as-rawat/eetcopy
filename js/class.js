@@ -6,7 +6,7 @@ class cls {
     this.textAreaToggleSelector = textAreaToggleSelector;
     this.textAreaToggleCheckerSelector = textAreaToggleCheckerSelector;
     this.textAreaOnConsoleSelector = textAreaOnConsoleSelector;
-    this.saveClipboardElement = document.createElement("textarea"); // Saves the content of user's clipboard
+    this.saveClipboardElement = Utils.getHiddenTextArea(); // Saves the content of user's clipboard
     this.inputString = ""; // Stores all testcase, same as to be put in "Console"
   }
 
@@ -46,20 +46,18 @@ class cls {
     document.body.appendChild(this.saveClipboardElement);
     this.saveClipboardElement.select();
     document.execCommand('paste');
-    this.saveClipboardElement.blur();
   }
 
   restoreClipboard() {
     this.saveClipboardElement.select();
     document.execCommand('selectAll', false, null);
     document.execCommand('cut');
-    this.saveClipboardElement.blur();
-    document.body.removeChild(this.saveClipboardElement);
+    this.saveClipboardElement.parentNode.removeChild(this.saveClipboardElement);
   }
 
   copyTextToClipboard() {
     //Create a textbox field where we can insert text to.
-    var copyFrom = document.createElement("textarea");
+    var copyFrom = Utils.getHiddenTextArea();
     //Set the text content to be the text you wished to copy.
     copyFrom.textContent = this.inputString;
 
@@ -129,5 +127,16 @@ class Utils {
 
   static sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  static getHiddenTextArea() {
+    var textArea = document.createElement('textarea');
+    textArea.style.height = '0';
+    textArea.style.position = 'absolute';
+    textArea.style.zIndex = '-1';
+    textArea.style.top = '20px';
+    textArea.style.left = '20px';
+    
+    return textArea;
   }
 }
