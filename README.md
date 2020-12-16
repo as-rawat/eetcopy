@@ -1,4 +1,5 @@
-# eetcopy
+
+#  eetcopy ![eetcopy](https://github.com/as-rawat/eetcopy/blob/master/icons/icon16.png?raw=true)
 
 ## Chrome extension to copy test case in leetcode.
 
